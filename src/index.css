@@ -1,0 +1,97 @@
+/* WebKit/Blink Browsers */
+::selection {
+    background: #fff;
+    color: #000;
+}
+
+/* Gecko Browsers */
+::-moz-selection {
+    background: #fff;
+    color: #000;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  font-kerning: normal;
+  -moz-font-feature-settings: "kern", "liga", "clig", "calt";
+  -ms-font-feature-settings: "kern", "liga", "clig", "calt";
+  -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
+  font-feature-settings: "kern", "liga", "clig", "calt";
+  word-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #fff;
+  font-size:16px;
+  font-family:'Roboto', sans-serif;
+  background-color:#000;
+}
+
+@media only screen and (max-width:900px){
+    html{
+        font-size:14px;
+    }
+}
+
+body {
+  margin: 0;
+}
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+    text-decoration:none;
+    color:#fff;
+}
+a:active, 
+a:focus, 
+a:focus-within, 
+a:focus-visible,
+a:hover, 
+a:visited,
+div:focus
+{
+    outline-width: 0;
+    outline:none;
+}
+
+a:hover{
+    text-decoration:underline;
+}
+
+p{
+    margin:0;
+}
+
+h1, 
+h2,
+h3,
+h4, 
+h5,
+h6{
+    margin:0;
+    font-weight:normal;
+}
+
+button{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
