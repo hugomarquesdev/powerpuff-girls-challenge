@@ -63,6 +63,10 @@ const HeaderStyled = styled.header`
         .content{
             margin-left: 0;
             text-align: center;
+
+            p{
+                margin:0 auto;
+            }
         }
     }   
 `
