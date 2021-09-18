@@ -18,7 +18,7 @@ const EpisodesPage = () => {
                         <img src={episode.image.original} alt={'Powerpuff Girls - Season ' + episode.season + ', Episode ' + episode.number}/>
                     </div>
                     <div className='content'>
-                        <h2>{episode.name}</h2>
+                        <h2><b>{episode.number}.&nbsp;</b>{episode.name}</h2>
                         <p dangerouslySetInnerHTML={{ __html: episode.summary}}></p>
                     </div>
                 </div>

@@ -39,6 +39,7 @@ const ShowPage = ({ episodes, seasons }) => {  // RECEIVES EPISODE AND SEASONS D
                                 }}
                             >
                                 <img src={episode.image.medium} alt={'Powerpuff Girls - Season ' + episode.season + ', Episode ' + episode.number}/>
+                                <span><b>{episode.number}.&nbsp;</b></span>
                                 <span>{episode.name}</span>
                             </Link>
                         </div>
@@ -54,6 +55,7 @@ const ShowPage = ({ episodes, seasons }) => {  // RECEIVES EPISODE AND SEASONS D
                                 }}
                             >
                                 <img src={episode.image.medium} alt={'Powerpuff Girls - Season ' + episode.season + ', Episode ' + episode.number}/>
+                                <span><b>{episode.number}.&nbsp;</b></span>
                                 <span>{episode.name}</span>
                             </Link>
                         </div>
