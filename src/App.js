@@ -6,7 +6,7 @@ import Header from './components/Header'
 
 const App = () => {
     const [error, setError] = useState(null)
-    const [isLoaded, setIsLoaded] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false) // WHILE API FETCHING ISN'T COMPLETED, SET 'isLoaded' TO FALSE
     const [show, setShow] = useState()
   
     // FETCH DATA FROM API
@@ -18,14 +18,14 @@ const App = () => {
             fetch('https://api.tvmaze.com/shows/1955/seasons')
         ])
         .then(res => 
-            Promise.all(res.map(res => res.json())))  // CREATES JSON OBJECT WITH SHOW DATA AND EPISODES
+            Promise.all(res.map(res => res.json())))  // CREATES JSON OBJECT WITH SHOW DATA, EPISODES AND SEASONS
         .then(
             (result) => {
-                setIsLoaded(true) // WHILE FETCHING, SET 'isLoaded' TO TRUE
+                setIsLoaded(true) // IF FETCHING WAS COMPELTED SUCCESSFULLY, SET 'isLoaded' TO TRUE
                 setShow({ details: result[0], episodes: result[1], seasons: result[2] }) // SET 'show' STATE TO 3 OBJECTS -> 'details' (SHOW DATA), 'episodes' (EPISODES DATA), 'seasons' (SEASONS DATA)
             },
             (error) => {
-                setIsLoaded(true) // WHILE FETCHING, SET 'isLoaded' TO TRUE
+                setIsLoaded(true) // IF FETCHING HAD AN ERROR, SET 'isLoaded' TO TRUE
                 setError(error) // IF THERE'S AN ERROR, SET 'error' TO TRUE
         });
     }, [])
