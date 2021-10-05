@@ -1,13 +1,21 @@
 import { Route, Switch } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import ShowPage from './pages/show'
-import EpisodesPage from './pages/episodes'
+import EpisodePage from './pages/episode'
 import Header from './components/Header'
+import { useSelector, useDispatch } from 'react-redux'
+import { showData } from './state/showSlice'
 
 const App = () => {
     const [error, setError] = useState(null)
     const [isLoaded, setIsLoaded] = useState(false) // WHILE API FETCHING ISN'T COMPLETED, SET 'isLoaded' TO FALSE
+    const showState = useSelector(state => state.episode.show)   
     const [show, setShow] = useState()
+    const dispatch = useDispatch()
+
+    useEffect(() => { // SET SHOWDATA'S STATE TO AN OBJECT WITH THE DETAILS, EPISODES AND SEASONS
+        dispatch(showData(show))
+    },[show])
   
     // FETCH DATA FROM API
     useEffect(() => {
@@ -22,7 +30,7 @@ const App = () => {
         .then(
             (result) => {
                 setIsLoaded(true) // IF FETCHING WAS COMPELTED SUCCESSFULLY, SET 'isLoaded' TO TRUE
-                setShow({ details: result[0], episodes: result[1], seasons: result[2] }) // SET 'show' STATE TO 3 OBJECTS -> 'details' (SHOW DATA), 'episodes' (EPISODES DATA), 'seasons' (SEASONS DATA)
+                setShow({ details: result[0], episodes: result[1], seasons: result[2] }) // SET 'show' STATE TO 3 OBJECTS -> 'details', 'episodes' and 'seasons'
             },
             (error) => {
                 setIsLoaded(true) // IF FETCHING HAD AN ERROR, SET 'isLoaded' TO TRUE
@@ -31,7 +39,7 @@ const App = () => {
     }, [])
     
     // WHILE IT'S FETCHING THE DATA OR THE 'show' STATE IS STILL EMPTY, SHOW A LOADING MESSAGE
-    if (!isLoaded || !show) {
+    if (!isLoaded || !showState) {
         return <div>Loading...</div>
     } else 
         // RETURNS ERROR MESSAGE IF THE DATA WASN'T FETCHED CORRECTLY
@@ -41,14 +49,15 @@ const App = () => {
         // THE APP RUNS IF THE DATA WAS FETCHED CORRECTLY
         return (
             <>
-                <Header show={show.details}/> {/* SEND SHOW DATA AS PROPS */}
+                <Header/>
                 <Switch>
                     <Route path='/' exact>
-                        <ShowPage episodes={show.episodes} seasons={show.seasons}/> {/* SEND EPISODES AND SEASONS DATA AS PROPS */}
+                        <ShowPage/>
                     </Route>
-                    <Route path='/episodes'>
-                        <EpisodesPage/>
+                    <Route path='/episode'>
+                        <EpisodePage/>
                     </Route>
+                    
                 </Switch>
             </>
         )

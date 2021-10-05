@@ -1,21 +1,36 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import Navbar from '../components/Navbar'
+import { useDispatch } from 'react-redux'
+import { selectedNumberState, selectedSeasonState } from '../state/showSlice'
 
-const Header = ({ show }) => ( // RECEIVES SHOW DATA AS PROPS
-    <HeaderStyled>
-        <div className='image-container'>
-            <Link to='/'>
-                <img src={show.image.medium} alt='Powerpuff Girls'/>
-            </Link>
-        </div>
-        <div className='content'>
-            <Link to='/'>
-                <h1>{show.name}</h1>
-            </Link>
-            <p dangerouslySetInnerHTML={{ __html: show.summary}}></p>
-        </div>
-    </HeaderStyled>
-)
+const Header = () => {
+    const showState = useSelector(state => state.episode.show) // GET SHOW DATA FROM STORE
+    const dispatch = useDispatch()
+    
+    return(
+        <HeaderStyled>
+            <div className='details'>
+                <div className='image-container'>
+                    <Link 
+                        to='/' 
+                        onClick={() => {dispatch(selectedNumberState(0)); dispatch(selectedSeasonState(0))}} // SET SELECTED EPISODE NUMBER AND SELECTED SEASON TO 0
+                    >
+                        <img src={showState.details.image.medium} alt='Powerpuff Girls'/>
+                    </Link>
+                </div>
+                <div className='content'>
+                    <Link to='/'>
+                        <h1>{showState.details.name}</h1>
+                    </Link>
+                    <p dangerouslySetInnerHTML={{ __html: showState.details.summary}}></p>
+                </div>
+            </div>
+            <Navbar/>
+        </HeaderStyled>
+    )
+}
   
 export default Header
 
@@ -23,7 +38,13 @@ const HeaderStyled = styled.header`
     position:relative;
     padding:20px 3%;
     display: flex;
-    align-items: center;
+    flex-direction:column;
+
+    .details{
+        padding-bottom:20px;
+        display:flex;
+        align-items:center;
+    }
 
     .image-container{
         max-width:150px;
@@ -48,7 +69,9 @@ const HeaderStyled = styled.header`
 
     // MEDIA QUERIES
     @media only screen and (max-width: 950px) {
-        display: block;
+        .details{
+            display: block;
+        }
         
         .image-container{
             position: absolute;
